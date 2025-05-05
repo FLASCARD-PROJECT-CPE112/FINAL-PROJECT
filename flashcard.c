@@ -9,8 +9,8 @@ int idcount = 1;
 
 typedef struct 
 {
-    char username[100];
-    char password[100];
+    char username[100]; //store username
+    char password[100]; //store passowrd
 }User;
 
 User currentuser;
@@ -39,7 +39,7 @@ struct HashTableEntry
 struct card *head = NULL; //NULL = no flashcard
 struct HashTableEntry hashTable[TABLE_SIZE];
 
-//เดี๋ยวมาเช็ค
+
 int hashFunction(int key) 
 {
     return key % TABLE_SIZE;
@@ -76,7 +76,7 @@ void saveFlashcardsToCSV(const char *filename)
     {
         fprintf(file, "%d,%s,%s,%d,%s,%s\n",
                 temp->ID, temp->question, temp->answer, temp->score,
-                temp->category, temp->subcategory); //ดึงค่าตัวที่tempชี้
+                temp->category, temp->subcategory); 
         temp = temp->next; //temp point to next flashcard
     }
 
@@ -846,7 +846,7 @@ void showMenu()
     printf("4. Delete Flashcard\n");
     printf("5. Practice Flashcards\n");
     printf("6. Logout\n");
-    printf("Enter your choice: ");
+    printf("Enter your choice (1-6): ");
 }
 
 // this menu will show after user log in
