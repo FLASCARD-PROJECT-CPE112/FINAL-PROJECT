@@ -11,7 +11,7 @@
 
 ## Project Description
 
-This is a **console-based flascard learning system written in C**.
+This is a **console-based flashcard learning system written in C**.
 - Sign up and log in using unique usernames
 - Add, View, Edit, and Delete flashcards
 - Organize flashcards into categories and subcategories
@@ -46,7 +46,7 @@ gcc flashcard.c -o flashcard
 Enter your choice: 1\
 Enter new username: anton\
 Enter new password: 1234\
-Registration successful! You can log i to your account.
+Registration successful! You can log in to your account.
 
 ### 2. Login
 Enter your choice: 2\
@@ -111,7 +111,7 @@ Enter your choice: 4
 --- Available Flashcards ---\
 ID: 1 | Category: Math | Subcategory: M1 | Question: 5 + 2
 
-Enter the ID of the flahcard to delete: 1
+Enter the ID of the flashcard to delete: 1
 
 Flashcard found:\
 ID: 1\
