@@ -1,6 +1,6 @@
-# A Digital Flashcard Learning System
+# A Digital Flashcard Learning System 🖥️
 
-## Table of Contents
+## Table of Contents 
 - [Project Description](#project-description)
 - [How to Run the Code](#how-to-run-the-code)
 - [Sample Input and Expected Output](#sample-input-and-expected-output)
