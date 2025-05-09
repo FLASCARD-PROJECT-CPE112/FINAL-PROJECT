@@ -58,6 +58,7 @@ struct card *createCard(int id, const char *question, const char *answer, const 
     return newCard;
 }
 
+
 // save all flashcard information in csv file
 void saveFlashcardsToCSV(const char *filename) 
 {
@@ -91,6 +92,7 @@ void addFlashcard()
     int score; //stor score from user
     char question[Max], answer[Max], category[100], subcategory[100];
 
+    printf("\n------Add Flashcards------\n");
 
     printf("Enter question: "); //user input question
     fgets(question, Max, stdin);
@@ -127,10 +129,8 @@ void addFlashcard()
     fgets(subcategory, 100, stdin);
     subcategory[strcspn(subcategory, "\n")] = '\0';
 
-
     // use id count and increase id
     int id = idcount++;
-
 
     struct card *newCard = createCard(id, question, answer, category, subcategory, score);
 
@@ -167,6 +167,9 @@ void addFlashcard()
 // view flashcard store in linked list
 void viewFlashcards() 
 {
+
+    printf("\n------View Flashcards------\n");
+
     if (head == NULL) //if no flashcard or user dont add flashcard yet it will exit the function
     {
         printf("No flashcards available.\n");
@@ -199,6 +202,8 @@ struct card *searchByID(int id)
 //edit flashcard funcion
 void editFlashcard() 
 {
+    printf("\n------Edit Flashcard------\n");
+
     if (head == NULL) //check if there any flashcard first
     {
         printf("No flashcards available.\n");
@@ -206,6 +211,7 @@ void editFlashcard()
     }
 
     printf("\n--- Available Flashcards ---\n"); //show all flashcard detail with ID
+
     struct card* temp = head;
     while (temp != NULL) 
     {
@@ -295,6 +301,9 @@ void editFlashcard()
 //delete flashcard
 void deleteFlashcard() 
 {
+
+    printf("\n------Delete Flashcard------\n");
+
     if (head == NULL) // check have flashcard or not
     {
         printf("No flashcards available.\n");
@@ -324,6 +333,7 @@ void deleteFlashcard()
         printf("Invalid input. Returning to menu.\n");
         return;
     }
+    
     //use hash table for search flashcard by ID
     struct card *cardToDelete = searchByID(id);
     if (cardToDelete == NULL) 
@@ -467,6 +477,8 @@ void practiceFlashcards()
     char category[100], subcategory[100], sortOrder[Max];
     listCategories();
 
+    printf("\n------Practice Flashcards------\n");
+
     printf("Enter category: "); //user need to input category and subcategory before practice flashcard
     fgets(category, 100, stdin);
     category[strcspn(category, "\n")] = '\0';
@@ -505,8 +517,8 @@ void practiceFlashcards()
     
     int sortchoice;  //user can select the practice mode that sort by score
     printf("\nSort by score?\n");
-    printf("1. Lowest to Highest\n");
-    printf("2. Highest to Lowest\n");
+     printf("1. The Easiest to The Most Difficult\n");
+    printf("2. The Most Difficult to The Easiest\n");
     printf("3. None\n");
     printf("Enter your choice (1-3): ");
     scanf("%d", &sortchoice);
@@ -514,7 +526,7 @@ void practiceFlashcards()
 
 
 //bubble sort > sort the score that user input in flashcard
-//Lowest to Highest
+//The Easiest to The Most Difficult
     if (sortchoice == 1) 
     {
         for (int i = 0; i < count - 1; i++)
@@ -544,10 +556,11 @@ void practiceFlashcards()
         }
             
     }
- //summary score
+ //The Most Difficult to The Easiest
     int totalAnswered = 0;
     int correctAnswers = 0;
     char choice[10];
+    int sum = 0;
 
     for (int i = 0; i < count; i++) 
     {
@@ -567,6 +580,7 @@ void practiceFlashcards()
 
         if (strcmp(userAns, arr[i]->answer) == 0) 
         {
+            sum = sum + arr[i]->score;
             printf("Correct!\n");
             correctAnswers++;
         } 
@@ -599,7 +613,7 @@ void practiceFlashcards()
     }
     //show the summary score 
     printf("\nPractice Summary: %d correct out of %d questions.\n", correctAnswers, totalAnswered);
-    printf("Total Score: %d\n", totalScore());
+    printf("Total Score: %d\n", sum);
     free(arr);
 }
 
@@ -626,7 +640,6 @@ void loadFlashcardsFromCSV(const char *filename)
 
         struct card *newCard = createCard(id, question, answer, category, subcategory, score); //create new struct flashcard
 
-        
         if (head == NULL)
         {
             head = newCard; //1st card in list
@@ -728,7 +741,6 @@ void SignupUser()
         return;
     }
     
-    
 
     fprintf(file, "%s,%s\n", username, password);
     fclose(file);
@@ -810,7 +822,6 @@ void showLoginmenu()
         printf("Enter your choice: ");
         fgets(input, sizeof(input), stdin);
         
-
         choice = -1;
 
         if (sscanf(input, "%d", &choice) != 1) //user can enter only 1-3, can't enter alphabet
